@@ -11,6 +11,7 @@ const flowNadCaja = require('./obj/flowNadCaja')
 // Flow PRINCIPAL INI
 const flowPrincipal = addKeyword(['pepito', 'inicio'])
     .addAnswer(`🙌 Hola bievenido al soporte tecnico automatizado `)
+    .addAnswer(' ', {media: 'https://i.imgur.com/BIv2mHb.png',})
     .addAnswer(
         [
             'Selecciona el producto de interes y digite el numero correspondiente',
@@ -31,6 +32,7 @@ const flowPrincipal = addKeyword(['pepito', 'inicio'])
         },
         [flowTransact, flowTaFace, flowVisualStore, flowNadCaja]
     )
+
 // FLOW PRINCIPAL FIN
 
 module.exports = flowPrincipal
