@@ -1,7 +1,11 @@
 const { addKeyword } = require('@bot-whatsapp/bot')
+const { flowGracias, flowGraciasContactando } = require('./flowGracias');
+const enviarCorreoReclamo = require('./nodemails');
 
 
-const flowGenerarCertificado = addKeyword(['1','2'], {sensitive: true}).addAnswer('Mandar Procedimiento')
+const flowGenerarCertificado = addKeyword(['1','2'], {sensitive: true})
+.addAnswer('Aquí tiene una pequeña guia', {media: 'C:/Users/facun/OneDrive/Escritorio/Manual Certificados.pdf',})
+.addAnswer('¿Le ha sido útil esta información?', {capture: true}, async (ctx, {gotoFlow}) => {gotoFlow(flowGracias)})
 
 const flowCertificado = addKeyword(['2'], {sensitive: true})
 .addAnswer('Seleccione la opcion de interes y digtie el numero correspondiente')

@@ -9,6 +9,7 @@ flowGraciasContactando = addKeyword(['gracias'], {sensitive: true})
 .addAnswer('Gracias por su mensaje. Aguarde, lo estamos poniendo en contacto con un tecnico')
 .addAnswer('Escriba *inicio* si quiere volver a chatear')
 
-module.exports = flowGracias
-
-module.exports = flowGraciasContactando
+module.exports = {
+    flowGracias,
+    flowGraciasContactando
+};

@@ -1,9 +1,17 @@
 const { addKeyword } = require('@bot-whatsapp/bot')
+const { flowGracias, flowGraciasContactando } = require('./flowGracias');
+const enviarCorreoReclamo = require('./nodemails');
 
+const flowCargarCaes = addKeyword(['1'], {sensitive: true})
+.addAnswer(' ', {media: 'https://i.imgur.com/j5UPQSX.png',})
+.addAnswer(' ', {media: 'https://i.imgur.com/xeN2RZQ.png',})
+.addAnswer('Aquí tiene una pequeña guia', {media: 'https://i.imgur.com/pzfPy6O.png',})
+.addAnswer('¿Le ha sido útil esta información?', {capture: true}, async (ctx, {gotoFlow}) => {gotoFlow(flowGracias)})
 
-const flowCargarCaes = addKeyword(['1'], {sensitive: true}).addAnswer('Mandar Procedimiento')
+const flowSolicitudCaes = addKeyword(['2'], {sensitive: true})
+.addAnswer('La solicitud de caes es un proceso de DGI, comuniquese con su contador o estudio contable para asesorarse')
+.addAnswer('¿Le ha sido útil esta información?', {capture: true}, async (ctx, {gotoFlow}) => {gotoFlow(flowGracias)})
 
-const flowSolicitudCaes = addKeyword(['2'], {sensitive: true}).addAnswer('Mandar Procedimiento')
 
 const flowCaes = addKeyword(['3'], {sensitive: true})
 .addAnswer('Seleccione la opcion de interes y digtie el numero correspondiente')

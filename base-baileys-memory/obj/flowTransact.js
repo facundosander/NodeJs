@@ -1,10 +1,17 @@
 const { addKeyword } = require('@bot-whatsapp/bot')
-const flowGracias = require('./flowGracias')
+const { flowGracias, flowGraciasContactando } = require('./flowGracias');
+const enviarCorreoReclamo = require('./nodemails');
 // Flow TRANSACT INI
 
     //Flow Reclamo POS INI
-    const flowReclamoPos = addKeyword(['4'], {sensitive: true}).addAnswer('Por favor, mande un *video del problema* que está teniendo con el pos o *indicaciones de que le está sucediendo*. lo contactaremos con el primer Tecnico disponible')
-    .addAnswer('Si quiere volver a chatear escriba *inicio*')
+    const flowReclamoPos = addKeyword(['4'], {sensitive: true}).addAnswer('Por favor, mande un *video del problema* que está teniendo con el pos o *indicaciones de que le está sucediendo*. lo contactaremos con el primer Tecnico disponible'
+    ,{capture: true},
+    async (ctx, {gotoFlow}) => {
+        enviarCorreoReclamo('POS',ctx.body, ctx.from)
+        await gotoFlow(flowGraciasContactando)
+        }
+    )
+
     //Flow Reclamo POS FIN
 
     //Flow Como Funcionan los POS INI
@@ -70,7 +77,10 @@ const flowGracias = require('./flowGracias')
     .addAnswer('¿Le ha sido útil esta información?', {capture: true}, async (ctx, {gotoFlow}) => {gotoFlow(flowGracias)})
 
 
-    const flowUsoPosIsa = addKeyword(['3'], {senstive: true}).addAnswer('Mandar Procedimiento')
+    const flowUsoPosIsa = addKeyword(['3'], {senstive: true})
+    .addAnswer(' ', {media: 'https://i.imgur.com/pEttxcV.png',})
+    .addAnswer('Aquí tiene una pequeña guia',{media: 'https://i.imgur.com/DdfijAP.png',})
+    .addAnswer('¿Le ha sido útil esta información?', {capture: true}, async (ctx, {gotoFlow}) => {gotoFlow(flowGracias)})
 
     const flowConectarWifi = addKeyword(['2'], {senstive: true})
     .addAnswer('Aquí tiene una pequeña guia',{media: 'https://i.imgur.com/udFhsQH.png',})

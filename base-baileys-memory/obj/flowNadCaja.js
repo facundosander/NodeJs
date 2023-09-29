@@ -1,9 +1,19 @@
 const { addKeyword } = require('@bot-whatsapp/bot')
 const flowCertificado = require('./flowCertificado')
 const flowCaes = require('./flowCaes')
+const { flowGracias, flowGraciasContactando } = require('./flowGracias');
+const enviarCorreoReclamo = require('./nodemails');
 
 
-const flowReclamoCaja = addKeyword(['1'], {sensitive: true}).addAnswer('Comnunicarse a soporte@nad.uy o al tel 2917 0075 int 3')
+
+const flowReclamoCaja = addKeyword(['1'], {sensitive: true})
+.addAnswer('Por favor denos una breve explicacion de lo que le esta sucediendo, tambien nos va ser de ayuda cualquier tipo de informacion extra como videos fotos. lo pondremos en contacto con el primer Tecnico disponible'
+,{capture: true},
+async (ctx, {gotoFlow}) => {
+    enviarCorreoReclamo('NadCaja',ctx.body, ctx.from)
+    await gotoFlow(flowGraciasContactando)
+}
+)
 
 const flowNadCaja = addKeyword(['4'], {sensitive: true})
 .addAnswer('Seleccione la opcion de interes y digtie el numero correspondiente')
