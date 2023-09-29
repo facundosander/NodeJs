@@ -1,11 +1,20 @@
 const { addKeyword } = require('@bot-whatsapp/bot')
 const flowCertificado = require('./flowCertificado')
 const flowCaes = require('./flowCaes')
+const { flowGracias, flowGraciasContactando } = require('./flowGracias');
+const enviarCorreoReclamo = require('./nodemails');
 
 //Flow TaFace INI
 
 
-    const flowReclamoTaFace = addKeyword(['4'], {sensitive: true}).addAnswer('Comnunicarse a soporte@nad.uy o al tel 2917 0075 int 3')
+    const flowReclamoTaFace = addKeyword(['4'], {sensitive: true})
+    .addAnswer('Por favor denos una breve explicacion de lo que le esta sucediendo,, tambien nos va ser de ayuda cualquier tipo de informacion extra como videos o fotos. Lo pondremos en contacto con el primer Tecnico disponible'
+    ,{capture: true},
+    async (ctx, {gotoFlow}) => {
+        enviarCorreoReclamo('TaFace',ctx.body, ctx.from)
+        await gotoFlow(flowGraciasContactando)
+    }
+)
 
 
     //Flow Ingresar TaFace INI
