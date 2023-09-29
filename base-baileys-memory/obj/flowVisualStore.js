@@ -6,7 +6,7 @@ const { flowGracias, flowGraciasContactando } = require('./flowGracias');
 
 
 const flowReclamoVSS = addKeyword(['1'], {sensitive: true})
-.addAnswer('Por favor denos una breve explicacion de lo que le esta sucediendo,, tambien nos va ser de ayuda cualquier tipo de informacion extra como videos o fotos. Lo pondremos en contacto con el primer Tecnico disponible'
+.addAnswer('Por favor denos una breve explicacion de lo que le esta sucediendo, tambien nos va ser de ayuda cualquier tipo de informacion extra como videos o fotos. Lo pondremos en contacto con el primer Tecnico disponible'
 ,{capture: true},
 async (ctx, {gotoFlow}) => {
     enviarCorreoReclamo('VSS',ctx.body, ctx.from)
