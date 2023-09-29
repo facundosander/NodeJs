@@ -8,7 +8,7 @@ const enviarCorreoReclamo = require('./nodemails');
 
 
     const flowReclamoTaFace = addKeyword(['4'], {sensitive: true})
-    .addAnswer('Por favor denos una breve explicacion de lo que le esta sucediendo,, tambien nos va ser de ayuda cualquier tipo de informacion extra como videos o fotos. Lo pondremos en contacto con el primer Tecnico disponible'
+    .addAnswer('Por favor denos una breve explicacion de lo que le esta sucediendo, tambien nos va ser de ayuda cualquier tipo de informacion extra como videos o fotos. Lo pondremos en contacto con el primer Tecnico disponible'
     ,{capture: true},
     async (ctx, {gotoFlow}) => {
         enviarCorreoReclamo('TaFace',ctx.body, ctx.from)
