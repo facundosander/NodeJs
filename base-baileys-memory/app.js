@@ -1,4 +1,5 @@
 const { createBot, createProvider, createFlow, addKeyword } = require('@bot-whatsapp/bot')
+require('dotenv').config();
 
 const QRPortalWeb = require('@bot-whatsapp/portal')
 const BaileysProvider = require('@bot-whatsapp/provider/baileys')
@@ -14,7 +15,7 @@ const flowPrincipal = addKeyword(['pepito', 'inicio'])
     .addAnswer(' ', {media: 'https://i.imgur.com/BIv2mHb.png',})
     .addAnswer(
         [
-            'Selecciona el producto de interes y digite el numero correspondiente',
+            '*Selecciona el producto de interes y digite el numero correspondiente*',
             '1 👉 TRANSACT / POS',
             '2 👉 TaFace',
             '3 👉 Visual Store',
